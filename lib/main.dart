@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loqta/Ui/View/login/login%20screen.dart';
+import 'package:loqta/Ui/View/master%20screen/master%20screen.dart';
 import 'package:loqta/Ui/View/register/register%20screen.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         LoginScreen.loginname: (_) => LoginScreen(),
-        RegisterScreen.registername: (_) => RegisterScreen()
+        RegisterScreen.registername: (_) => RegisterScreen(),
+        MasterScreen.masterScreenname : (_) => MasterScreen()
       },
       initialRoute: LoginScreen.loginname,
     );

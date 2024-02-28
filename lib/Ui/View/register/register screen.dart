@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loqta/Ui/Utiles/color%20file.dart';
 import 'package:loqta/Ui/View/login/login%20screen.dart';
 
 import '../login/textfield wedget.dart';
@@ -27,6 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.primarycolor,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: Form(

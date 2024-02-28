@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:loqta/Ui/Utiles/color%20file.dart';
 import 'package:loqta/Ui/View/login/textfield%20wedget.dart';
+import 'package:loqta/Ui/View/master%20screen/master%20screen.dart';
 import 'package:loqta/Ui/View/register/register%20screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.primarycolor,
       body: Form(
         key: formkey,
         child: Container(
@@ -38,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Text(
                   'Email address',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
                 ),
                 TextFieldWedget(
                     hint: 'You@Example.com',
@@ -59,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Text(
                   'Password',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
                 ),
                 TextFieldWedget(
                   hint: 'your Password',
@@ -92,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height:MediaQuery.sizeOf(context).width*0.15 ,
                   child: ElevatedButton(onPressed: (){
                     login();
-                    //  Navigator.pushReplacementNamed(context, Selectscreen.selectname);
+                    Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
                   },
                     child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
                     style: ElevatedButton.styleFrom(
@@ -111,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: (){
                           Navigator.pushReplacementNamed(context, RegisterScreen.registername);
                         },
-                        child: Text('Sign Up',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 20, color: Color(0xefe817c3)),)),
+                        child: Text('Sign Up',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 20, color: Colors.blue),)),
                   ],
                 ),
               ],
