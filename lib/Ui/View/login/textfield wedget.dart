@@ -19,7 +19,9 @@ class TextFieldWedget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+       // cursorColor: Colors.white,
         decoration: InputDecoration(
+         // fillColor: Colors.white,
           hintText: hint,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),

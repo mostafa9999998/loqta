@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:loqta/data/models/CategoryResponse.dart';
+
 class CategoriesStyle extends StatelessWidget {
-  CategoriesStyle({super.key,});
+  CategoriesStyle({super.key,required this.categoryResponse});
+  CategoryResponse categoryResponse ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,18 +15,19 @@ class CategoriesStyle extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(250),
               image: DecorationImage(
-                image: AssetImage('assets/images/testpic.png')
+                image: NetworkImage(categoryResponse.fullSrc??'',),
+                fit: BoxFit.fill
               )
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height*.02,
+            height: MediaQuery.of(context).size.height*.002,
           ),
           Text(
-           'title',
+           categoryResponse.name??'',
             style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
             textAlign: TextAlign.center,
           )

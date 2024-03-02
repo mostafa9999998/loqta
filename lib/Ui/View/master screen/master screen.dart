@@ -19,9 +19,7 @@ class _MasterScreenState extends State<MasterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Loqta',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22)),
-      ),
+
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
@@ -33,14 +31,14 @@ class _MasterScreenState extends State<MasterScreen> {
           backgroundColor: ColorApp.primarycolor,
           currentIndex: currentindex,
           selectedItemColor: Colors.white,
-          unselectedItemColor: Color(0xff7a7272) ,
+          unselectedItemColor: Colors.black ,
           onTap: (value) {
             currentindex = value ;
             setState(() {});
           },
           items: [
             BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage('assets/images/home.png')),
+              icon: Icon(Icons.home_filled), //ImageIcon(AssetImage('assets/images/home.png')),
               label: 'home'
             ),
             BottomNavigationBarItem(

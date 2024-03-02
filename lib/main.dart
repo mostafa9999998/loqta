@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loqta/Ui/View/login/login%20screen.dart';
+import 'package:loqta/Ui/View/master%20screen/category/product/product%20screen.dart';
 import 'package:loqta/Ui/View/master%20screen/master%20screen.dart';
 import 'package:loqta/Ui/View/register/register%20screen.dart';
 
@@ -14,10 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         LoginScreen.loginname: (_) => LoginScreen(),
         RegisterScreen.registername: (_) => RegisterScreen(),
-        MasterScreen.masterScreenname : (_) => MasterScreen()
+        MasterScreen.masterScreenname : (_) => MasterScreen(),
+        ProductScreen.ProductScreenname : (_) => ProductScreen()
       },
       initialRoute: LoginScreen.loginname,
     );

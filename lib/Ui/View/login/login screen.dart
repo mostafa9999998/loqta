@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                     child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:Color(0xefe817c3),
+                        backgroundColor:Colors.black,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),

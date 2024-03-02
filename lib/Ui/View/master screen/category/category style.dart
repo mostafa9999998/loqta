@@ -1,52 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:loqta/Ui/Utiles/color%20file.dart';
+import 'package:loqta/Ui/View/master%20screen/category/product/product%20screen.dart';
+import '../../../../data/models/productsListResponse.dart';
 
 class CategoyStyle extends StatelessWidget {
-  const CategoyStyle({super.key});
-
+  CategoyStyle({super.key,required this.productsListResponse});
+  ProductsListResponse productsListResponse ;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin:EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.02 ) ,
-      padding: EdgeInsets.all( MediaQuery.of(context).size.width*.01 ),
-      width: MediaQuery.of(context).size.width*.4 ,
-      decoration: BoxDecoration(
-        color: ColorApp.primarycolor,
-        borderRadius: BorderRadius.circular(15)
-      ),
-      child: Column(
-        children: [
-          Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width*.35 ,
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, ProductScreen.ProductScreenname);
+      },
+      child: Container(
+        margin:EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.02,
+        vertical:MediaQuery.of(context).size.width*.02 ) ,
+        //padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.03 ),
+        width: MediaQuery.of(context).size.width*.4 ,
+        height:MediaQuery.of(context).size.width*.6 ,
+        decoration: BoxDecoration(
+          color:Color(0x495b658a),
+          borderRadius: BorderRadius.circular(15)
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              height:MediaQuery.of(context).size.width*.3 ,
+              //width: MediaQuery.of(context).size.width*.4 ,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
+                color: Colors.orange,
+                borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
                 image: DecorationImage(
-                  image: AssetImage('assets/images/testpic.png')
-                )
+                    fit: BoxFit.fill,
+                    image: NetworkImage(productsListResponse.fullSrc??"")
+                ),
               ),
             ),
-          ),
-          Text('title ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800)),
-          Text('hint text desc  ',style: TextStyle(fontSize: 16)),
-          Row(
-            children: [
-              Text('50 LE  '),
-              Spacer(),
-             InkWell(
-               onTap: () {},
-               child: Container(
-                 width: MediaQuery.of(context).size.width*.08,
-                 height:  MediaQuery.of(context).size.width*.08,
-                 decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(15)
+           Container(
+             padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*.03 ),
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.stretch,
+               children: [
+                 SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                 Text(productsListResponse.name??"",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800)),
+                 SizedBox(height: MediaQuery.of(context).size.height*.005,),
+                 Text(productsListResponse.description??"",style: TextStyle(fontSize: 16),maxLines: 1),
+                 SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                 Row(
+                   children: [
+                     Text('${productsListResponse.price} LE',style: TextStyle(fontWeight: FontWeight.w800)),
+                     Spacer(),
+                     InkWell(
+                       onTap: () {},
+                       child: Container(
+                         width: MediaQuery.of(context).size.width*.08,
+                         height:  MediaQuery.of(context).size.width*.08,
+                         decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(15)
+                         ),
+                         child: Icon(Icons.add_circle_outline,size: 30),
+                       ),
+                     ),
+                     SizedBox(width:  MediaQuery.of(context).size.width*.01,)
+                   ],
                  ),
-                 child: Icon(Icons.add),
+               ],
+             ),
+           ),
+           /* Text(productsListResponse.name??"",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800)),
+            SizedBox(height: MediaQuery.of(context).size.height*.005,),
+            Text(productsListResponse.description??"",style: TextStyle(fontSize: 16),maxLines: 1),
+            SizedBox(height: MediaQuery.of(context).size.height*.01,),
+            Row(
+              children: [
+                Text('${productsListResponse.price} LE',style: TextStyle(fontWeight: FontWeight.w800)),
+                Spacer(),
+               InkWell(
+                 onTap: () {},
+                 child: Container(
+                   width: MediaQuery.of(context).size.width*.08,
+                   height:  MediaQuery.of(context).size.width*.08,
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(15)
+                   ),
+                   child: Icon(Icons.add_circle_outline,size: 30),
+                 ),
                ),
-             )
-            ],
-          )
-        ],
+                SizedBox(width:  MediaQuery.of(context).size.width*.01,)
+              ],
+            ),*/
+            SizedBox(height: MediaQuery.of(context).size.height*.01,)
+          ],
+        ),
       ),
     );
   }
