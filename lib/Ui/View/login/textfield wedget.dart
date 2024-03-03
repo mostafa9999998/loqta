@@ -21,7 +21,8 @@ class TextFieldWedget extends StatelessWidget {
       child: TextFormField(
        // cursorColor: Colors.white,
         decoration: InputDecoration(
-         // fillColor: Colors.white,
+          fillColor: Colors.white,
+         filled: true,
           hintText: hint,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),

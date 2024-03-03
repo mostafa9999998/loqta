@@ -4,6 +4,9 @@ import 'package:loqta/Ui/View/master%20screen/category/category%20screen.dart';
 import 'package:loqta/Ui/View/master%20screen/home/home%20screen.dart';
 import 'package:loqta/Ui/View/master%20screen/order/order%20screen.dart';
 import 'package:loqta/Ui/View/master%20screen/profile/profile%20screen.dart';
+import 'package:provider/provider.dart';
+
+import '../../View model/main provider.dart';
 
 
 class MasterScreen extends StatefulWidget {
@@ -14,10 +17,12 @@ class MasterScreen extends StatefulWidget {
 }
 
 class _MasterScreenState extends State<MasterScreen> {
-   int currentindex = 0 ;
 
   @override
   Widget build(BuildContext context) {
+    MainProvider provider =Provider.of(context);
+
+    int currentindex = provider.currentindex ;
     return Scaffold(
 
       bottomNavigationBar: ClipRRect(
@@ -33,7 +38,7 @@ class _MasterScreenState extends State<MasterScreen> {
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.black ,
           onTap: (value) {
-            currentindex = value ;
+            provider.setcurrentindex(value) ;
             setState(() {});
           },
           items: [

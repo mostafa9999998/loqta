@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart';
 
 import '../models/CategoryResponse.dart';
 import '../models/ProductResponse.dart';
+import '../models/SearchBody.dart';
 import '../models/productsListResponse.dart';
 
 class ApiManager{
@@ -39,8 +41,24 @@ class ApiManager{
      throw e ;
    }
  }
-}
 
+ static Future<List<ProductsListResponse>> search( String name) async {
+   Uri url = Uri.parse("${baseapi}${hostapi}search");
+   final connectivityResult = await (Connectivity().checkConnectivity());
+   if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
+     // I am connected to a mobile network.
+     SearchBody searchBody = SearchBody(name : name ) ;
+     var response = await post(url,body: searchBody.toJson());
+       List<dynamic> jsonResponse = jsonDecode(response.body);
+       List<ProductsListResponse> productsListResponse = jsonResponse.map((json) => ProductsListResponse.fromJson(json)).toList();
+       return productsListResponse ;
+   } else {
+     throw Exception('network failed') ;
+   }
+ }
+
+
+}
 
 /*
  static Future<List<IssusesNameResponse>> getissuesname ()async{

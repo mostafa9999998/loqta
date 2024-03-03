@@ -33,9 +33,17 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * .2,
+                  height: MediaQuery.of(context).size.height * .06,
                 ),
-                Text('loginScreen'),
+                Center(
+                  child: Image.asset('assets/images/biglogo.png'),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .07,
+                ),
+                Text('Please sign in with your mail',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .05,
                 ),
@@ -97,9 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     login();
                     Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
                   },
-                    child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
+                    child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.blue),),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:Colors.black,
+                        backgroundColor:Colors.white,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
@@ -109,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Row(
                   children: [
-                    Text("     Don't have account  ",style: TextStyle(fontSize: 20),textAlign: TextAlign.center),
+                    Text("     Don't have account  ",style: TextStyle(fontSize: 20,color: Colors.white),textAlign: TextAlign.center),
                     InkWell(
                         onTap: (){
                           Navigator.pushReplacementNamed(context, RegisterScreen.registername);

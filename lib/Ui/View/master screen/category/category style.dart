@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:loqta/Ui/Utiles/color%20file.dart';
+import 'package:loqta/Ui/View%20model/main%20provider.dart';
 import 'package:loqta/Ui/View/master%20screen/category/product/product%20screen.dart';
+import 'package:provider/provider.dart';
 import '../../../../data/models/productsListResponse.dart';
 
 class CategoyStyle extends StatelessWidget {
@@ -7,8 +10,10 @@ class CategoyStyle extends StatelessWidget {
   ProductsListResponse productsListResponse ;
   @override
   Widget build(BuildContext context) {
+    MainProvider provider = Provider.of(context);
     return InkWell(
       onTap: () {
+        provider.setproductid(productsListResponse.id!);
         Navigator.pushNamed(context, ProductScreen.ProductScreenname);
       },
       child: Container(
@@ -17,9 +22,12 @@ class CategoyStyle extends StatelessWidget {
         //padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.03 ),
         width: MediaQuery.of(context).size.width*.4 ,
         height:MediaQuery.of(context).size.width*.6 ,
+        padding: EdgeInsets.only(right: MediaQuery.of(context).size.width*.01,left: MediaQuery.of(context).size.width*.01,
+            top: MediaQuery.of(context).size.width*.01),
         decoration: BoxDecoration(
-          color:Color(0x495b658a),
-          borderRadius: BorderRadius.circular(15)
+          border: Border.all(color:ColorApp.primarycolor,width: 3 ),
+          //color:Color(0x495b658a),
+          borderRadius: BorderRadius.circular(20)
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -28,7 +36,7 @@ class CategoyStyle extends StatelessWidget {
               height:MediaQuery.of(context).size.width*.3 ,
               //width: MediaQuery.of(context).size.width*.4 ,
               decoration: BoxDecoration(
-                color: Colors.orange,
+                //color: Colors.orange,
                 borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
                 image: DecorationImage(
                     fit: BoxFit.fill,

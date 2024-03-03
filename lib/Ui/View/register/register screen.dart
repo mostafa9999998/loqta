@@ -18,6 +18,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   TextEditingController phonecontroller = TextEditingController();
 
+  TextEditingController anotherphonecontroller = TextEditingController();
+
   TextEditingController namecontroller = TextEditingController();
 
   bool obsecure = true ;
@@ -38,15 +40,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .1,
+                    height: MediaQuery.of(context).size.height * .06,
                   ),
-                  Text('RegisterScreen'),
+                  Center(
+                    child: Image.asset('assets/images/biglogo.png'),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .05,
+                  ),
+                  Text('RegisterScreen', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * .03,
                   ),
                   Text(
                     'name',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
                   ),
                   TextFieldWedget(
                       hint: 'Name',
@@ -61,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Text(
                     'Email address',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
                   ),
                   TextFieldWedget(
                       hint: 'You@Example.com',
@@ -82,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Text(
                     'phone',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
                   ),
                   TextFieldWedget(
                       hint: 'phone num',
@@ -95,9 +103,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * .03,
                   ),
+                  TextFieldWedget(
+                      hint: 'another phone num',
+                      cotroler: anotherphonecontroller,
+                      Validfunction: (value) {
+                        if (value!.isEmpty || value.trim().isEmpty) {
+                          return "phone can't be empty";
+                        }
+                      }),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .03,
+                  ),
                   Text(
                     'Password',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
                   ),
                   TextFieldWedget(
                     hint: 'your Password',
@@ -123,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .1,
+                    height: MediaQuery.of(context).size.height * .07,
                   ),
                   Container(
                     width: MediaQuery.sizeOf(context).width*0.9,
@@ -132,9 +151,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       register();
                       //  Navigator.pushReplacementNamed(context, Selectscreen.selectname);
                     },
-                      child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
+                      child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.blue),),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor:Color(0xefe817c3),
+                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
                     ),
@@ -144,12 +163,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Row(
                     children: [
-                      Text("already have an account  ",style: TextStyle(fontSize: 20),textAlign:TextAlign.center),
+                      Text("already have an account  ",style: TextStyle(fontSize: 20,color: Colors.white),textAlign:TextAlign.center),
                       InkWell(
                           onTap: (){
                              Navigator.pushReplacementNamed(context, LoginScreen.loginname);
                           },
-                          child: Text('Sign in',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 20, color: Color(0xefe817c3)),)),
+                          child: Text('Sign in',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 20,color: Colors.blue),)),
                     ],
                   ),
                 ],
