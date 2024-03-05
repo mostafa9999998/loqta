@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loqta/Ui/Utiles/color%20file.dart';
 import 'package:loqta/Ui/View/login/login%20screen.dart';
+import 'package:loqta/data/api%20manager/Api%20manager.dart';
 
+import '../../Utiles/circler indecator.dart';
 import '../login/textfield wedget.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -12,7 +14,7 @@ static  String registername = 'RegisterScreen ';
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController logincontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
 
   TextEditingController passwordcontroller = TextEditingController();
 
@@ -21,6 +23,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController anotherphonecontroller = TextEditingController();
 
   TextEditingController namecontroller = TextEditingController();
+
+
+  TextEditingController addresscontroller = TextEditingController();
 
   bool obsecure = true ;
 
@@ -73,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   TextFieldWedget(
                       hint: 'You@Example.com',
-                      cotroler: logincontroller,
+                      cotroler: emailcontroller,
                       Validfunction: (value) {
                         if (value!.isEmpty || value.trim().isEmpty) {
                           return "e-mail can't be empty";
@@ -83,6 +88,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             .hasMatch(value);
                         if (!emailValid) {
                           return 'please enter valid e-mail';
+                        }
+                      }),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .03,
+                  ),
+                  Text(
+                    'Your Address',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
+                  ),
+                  TextFieldWedget(
+                      hint: 'Ex: nasr city in cairo',
+                      cotroler: addresscontroller,
+                      Validfunction: (value) {
+                        if (value!.isEmpty || value.trim().isEmpty) {
+                          return "address can't be empty";
                         }
                       }),
                   SizedBox(
@@ -179,5 +199,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void register() {}
+  void register() async {
+    if (formkey.currentState?.validate()==true){
+      try{
+        showLoading(context);
+        var R = ApiManager.register(namecontroller.text, emailcontroller.text, phonecontroller.text, passwordcontroller.text,addresscontroller.text);
+
+        if(await R){
+          hideLoading(context);
+          showsucsses(context, 'User added successfully');
+        } else{
+          hideLoading(context);
+          showerror(context, 'Email already exists');
+        }
+      }
+      catch(e){
+        hideLoading(context);
+        showerror(context, 'Some thing went wrong');
+      }
+    }
+  }
 }

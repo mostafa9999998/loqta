@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loqta/Ui/View%20model/auth%20provider.dart';
 import 'package:loqta/Ui/View%20model/main%20provider.dart';
 import 'package:loqta/Ui/View/login/login%20screen.dart';
 import 'package:loqta/Ui/View/master%20screen/category/product/product%20screen.dart';
@@ -17,9 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainProvider provider =MainProvider();
-
-    return ChangeNotifierProvider(
-      create: (context) => provider,
+    AuthProvider authProvider =AuthProvider();
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) =>provider ,),
+        ChangeNotifierProvider(create: (context) =>authProvider ,)
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {

@@ -23,45 +23,50 @@ class _MasterScreenState extends State<MasterScreen> {
     MainProvider provider =Provider.of(context);
 
     int currentindex = provider.currentindex ;
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: ()async {
+        return false ;
+      },
+      child: Scaffold(
 
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight:  Radius.circular(30)
+        bottomNavigationBar: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight:  Radius.circular(30)
+          ),
+          child: BottomNavigationBar(
+         //   enableFeedback: false,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: ColorApp.primarycolor,
+            currentIndex: currentindex,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.black ,
+            onTap: (value) {
+              provider.setcurrentindex(value) ;
+              setState(() {});
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled), //ImageIcon(AssetImage('assets/images/home.png')),
+                label: 'home'
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('assets/images/category.png')),
+                label: 'category'
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('assets/images/orders.png')),
+                label: 'order'
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('assets/images/person.png')),
+                label: 'profile'
+              ),
+            ],
+          ),
         ),
-        child: BottomNavigationBar(
-       //   enableFeedback: false,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: ColorApp.primarycolor,
-          currentIndex: currentindex,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.black ,
-          onTap: (value) {
-            provider.setcurrentindex(value) ;
-            setState(() {});
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled), //ImageIcon(AssetImage('assets/images/home.png')),
-              label: 'home'
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage('assets/images/category.png')),
-              label: 'category'
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage('assets/images/orders.png')),
-              label: 'order'
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage('assets/images/person.png')),
-              label: 'profile'
-            ),
-          ],
-        ),
+        body: screens[currentindex],
       ),
-      body: screens[currentindex],
     );
   }
   List screens = [Home(),CategoryScreen(),OrderScreen(),ProfileScreen()];

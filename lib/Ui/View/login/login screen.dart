@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:loqta/Ui/Utiles/color%20file.dart';
+import 'package:loqta/Ui/View%20model/auth%20provider.dart';
 import 'package:loqta/Ui/View/login/textfield%20wedget.dart';
 import 'package:loqta/Ui/View/master%20screen/master%20screen.dart';
 import 'package:loqta/Ui/View/register/register%20screen.dart';
+import 'package:provider/provider.dart';
+
+import '../../../data/api manager/Api manager.dart';
+import '../../../data/models/LoginResponse.dart';
+import '../../Utiles/circler indecator.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -13,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController logincontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
 
   TextEditingController passwordcontroller = TextEditingController();
 
@@ -53,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextFieldWedget(
                     hint: 'You@Example.com',
-                    cotroler: logincontroller,
+                    cotroler: emailcontroller,
                     Validfunction: (value) {
                       if (value!.isEmpty || value.trim().isEmpty) {
                         return "e-mail can't be empty";
@@ -103,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height:MediaQuery.sizeOf(context).width*0.15 ,
                   child: ElevatedButton(onPressed: (){
                     login();
-                    Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
+                   // Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
                   },
                     child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.blue),),
                     style: ElevatedButton.styleFrom(
@@ -133,5 +139,27 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login() {}
+  void login() async {
+    if (formkey.currentState?.validate()==true){
+      try{
+        showLoading(context);
+        var R = ApiManager.login(emailcontroller.text,passwordcontroller.text);
+        LoginResponse loginresponse = await ApiManager.loginresponse(emailcontroller.text,passwordcontroller.text);
+        int id = loginresponse.user!.id!;
+        AuthProvider authProvider =Provider.of<AuthProvider>(context);
+        authProvider.setuserid(id);
+        if(await R){
+          hideLoading(context);
+          Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
+        } else{
+          hideLoading(context);
+          showerror(context, 'Email or Password is incorrect');
+        }
+      }
+      catch(e){
+        hideLoading(context);
+        showerror(context, e.toString());
+      }
+    }
+  }
 }

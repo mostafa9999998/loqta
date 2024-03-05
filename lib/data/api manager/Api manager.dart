@@ -2,9 +2,16 @@ import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart';
+import 'package:loqta/data/models/OrderListResponse.dart';
+import 'package:loqta/data/models/OrderResponse.dart';
 
 import '../models/CategoryResponse.dart';
+import '../models/LoginBody.dart';
+import '../models/LoginResponse.dart';
+import '../models/OrderBody.dart';
 import '../models/ProductResponse.dart';
+import '../models/RegisterBody.dart';
+import '../models/RegisterResponse.dart';
 import '../models/SearchBody.dart';
 import '../models/productsListResponse.dart';
 
@@ -58,7 +65,107 @@ class ApiManager{
  }
 
 
+ static Future<bool> register(String name,String email,String phone,String password,String address) async {
+   Uri url = Uri.parse("${baseapi}${hostapi}Sign_up");
+   final connectivityResult = await (Connectivity().checkConnectivity());
+   if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
+     // I am connected to a mobile network.
+     RegisterBody registerBody = RegisterBody(
+         email: email,
+         name: name,
+         password: password,
+         phone: phone,
+       address: address
+     ) ;
+     var response = await post(url,body: registerBody.toJson());
+     if (response.statusCode >=200 || response.statusCode<300 ){
+       var b = RegisterResponse.fromJson(jsonDecode(response.body));
+       if (b.message =='User registered successfully'){
+         return true;
+       }else{return false;}
+     }else{return false;}
+   } else {
+     throw Exception('network failed') ;
+   }
+ }
+
+ static Future<bool> login(String email,String password) async {
+   Uri url = Uri.parse("${baseapi}${hostapi}login");
+   final connectivityResult = await (Connectivity().checkConnectivity());
+   if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
+     // I am connected to a mobile network.
+     LoginBody loginBody = LoginBody(
+       email: email,
+       password: password,
+     ) ;
+     var response = await post(url,body: loginBody.toJson());
+     if (response.statusCode >=200 || response.statusCode<300 ){
+       var b = LoginResponse.fromJson(jsonDecode(response.body));
+       if (b.type =='user'){
+         return true;
+       }else{return false;}
+     }else{return false;}
+   } else {
+     throw Exception('network failed') ;
+   }
+ }
+
+ static Future<LoginResponse> loginresponse(String email,String password) async {
+   Uri url = Uri.parse("${baseapi}${hostapi}login");
+     // I am connected to a mobile network.
+     LoginBody loginBody = LoginBody(
+       email: email,
+       password: password,
+     ) ;
+     var response = await post(url,body: loginBody.toJson());
+
+       var b = LoginResponse.fromJson(jsonDecode(response.body));
+       return b ;
+
+     }
+
+
+ static Future<bool> order(String usersId, String productId, String quantity, String price, String color, String size) async {
+   Uri url = Uri.parse("${baseapi}${hostapi}login");
+   final connectivityResult = await (Connectivity().checkConnectivity());
+   if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
+     // I am connected to a mobile network.
+     OrderBody orderBody = OrderBody(
+         color:color ,
+         size: size,
+         price: price,
+         productId: productId,
+         quantity: quantity,
+         usersId:usersId
+     ) ;
+     var response = await post(url,body: orderBody.toJson());
+     if (response.statusCode >=200 || response.statusCode<300 ){
+       var b = OrderResponse.fromJson(jsonDecode(response.body));
+       if (b.message =='Order created successfully'){
+         return true;
+       }else{return false;}
+     }else{return false;}
+   } else {
+     throw Exception('network failed') ;
+   }
+ }
+
+
+ static Future<OrderListResponse> getorderslist(int userid) async{
+   try{
+     Uri url = Uri.parse("${baseapi}${hostapi}get_order/$userid");
+     Response response = await get(url);
+     Map json   = jsonDecode(response.body);
+     OrderListResponse orderListResponse= OrderListResponse.fromJson(json);
+     return orderListResponse;
+   } catch(e){
+     throw e ;
+   }
+ }
+
 }
+
+
 
 /*
  static Future<List<IssusesNameResponse>> getissuesname ()async{
