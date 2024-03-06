@@ -1,33 +1,9 @@
-class OrderListResponse {
-  OrderListResponse({
-      this.orders,});
-
-  OrderListResponse.fromJson(dynamic json) {
-    if (json['orders'] != null) {
-      orders = [];
-      json['orders'].forEach((v) {
-        orders?.add(Orders.fromJson(v));
-      });
-    }
-  }
-  List<Orders>? orders;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (orders != null) {
-      map['orders'] = orders?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
-
-}
-
-class Orders {
-  Orders({
+class OrdersResponse {
+  OrdersResponse({
       this.order, 
       this.products,});
 
-  Orders.fromJson(dynamic json) {
+  OrdersResponse.fromJson(dynamic json) {
     order = json['order'] != null ? Order.fromJson(json['order']) : null;
     products = json['products'] != null ? Products.fromJson(json['products']) : null;
   }
@@ -50,19 +26,23 @@ class Orders {
 class Products {
   Products({
       this.productId, 
-      this.name,});
+      this.name, 
+      this.primaryImage,});
 
   Products.fromJson(dynamic json) {
     productId = json['product_id'];
     name = json['name'];
+    primaryImage = json['primary_image'];
   }
   int? productId;
   String? name;
+  String? primaryImage;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['product_id'] = productId;
     map['name'] = name;
+    map['primary_image'] = primaryImage;
     return map;
   }
 

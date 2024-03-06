@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
         var R = ApiManager.login(emailcontroller.text,passwordcontroller.text);
         LoginResponse loginresponse = await ApiManager.loginresponse(emailcontroller.text,passwordcontroller.text);
         int id = loginresponse.user!.id!;
-        AuthProvider authProvider =Provider.of<AuthProvider>(context);
+        AuthProvider authProvider =Provider.of<AuthProvider>(context,listen: false);
         authProvider.setuserid(id);
         if(await R){
           hideLoading(context);
@@ -158,7 +158,8 @@ class _LoginScreenState extends State<LoginScreen> {
       }
       catch(e){
         hideLoading(context);
-        showerror(context, e.toString());
+        //showerror(context, e.toString());
+        showmsg(context, 'Email or Password is incorrect');
       }
     }
   }

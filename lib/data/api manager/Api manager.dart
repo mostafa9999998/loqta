@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart';
-import 'package:loqta/data/models/OrderListResponse.dart';
+import 'package:loqta/data/models/DeleteResponse.dart';
 import 'package:loqta/data/models/OrderResponse.dart';
-
+import 'package:loqta/data/models/OrdersResponse.dart';
 import '../models/CategoryResponse.dart';
 import '../models/LoginBody.dart';
 import '../models/LoginResponse.dart';
@@ -126,7 +125,7 @@ class ApiManager{
 
 
  static Future<bool> order(String usersId, String productId, String quantity, String price, String color, String size) async {
-   Uri url = Uri.parse("${baseapi}${hostapi}login");
+   Uri url = Uri.parse("${baseapi}${hostapi}add_order");
    final connectivityResult = await (Connectivity().checkConnectivity());
    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
      // I am connected to a mobile network.
@@ -151,63 +150,29 @@ class ApiManager{
  }
 
 
- static Future<OrderListResponse> getorderslist(int userid) async{
+ static Future<List<OrdersResponse>> getorderslist(int userid) async{
    try{
      Uri url = Uri.parse("${baseapi}${hostapi}get_order/$userid");
      Response response = await get(url);
+     List<dynamic> jsonResponse = jsonDecode(response.body);
+     List<OrdersResponse> ordersResponse = jsonResponse.map((json) => OrdersResponse.fromJson(json)).toList();
+     return ordersResponse;
+   } catch(e){
+     throw e ;
+   }
+ }
+
+
+ static Future<DeleteResponse> deleteorder(int productid) async{
+   try{
+     Uri url = Uri.parse("${baseapi}${hostapi}delete_order/$productid");
+     Response response = await delete(url);
      Map json   = jsonDecode(response.body);
-     OrderListResponse orderListResponse= OrderListResponse.fromJson(json);
-     return orderListResponse;
+     DeleteResponse deleteResponse= DeleteResponse.fromJson(json);
+     return deleteResponse;
    } catch(e){
      throw e ;
    }
  }
 
 }
-
-
-
-/*
- static Future<List<IssusesNameResponse>> getissuesname ()async{
-   Uri url = Uri.parse("https://gradhub.hwnix.com/api/get_issues");
-   Response response = await get(url);
-   List<dynamic> jsonResponse = jsonDecode(response.body);
-   List<IssusesNameResponse> issusesNameResponse = jsonResponse.map((json) => IssusesNameResponse.fromJson(json)).toList();
-   return issusesNameResponse ;
- }
-
-  static Future<BabygrothResponse> getcategorydesc(int month ,String categ) async{
-   try{
-     Uri url = Uri.parse("https://gradhub.hwnix.com/api/get_${categ}_${month}");
-     Response response = await get(url);
-      print(response.body[0]);
-     Map json   = jsonDecode(response.body);
-     BabygrothResponse babygrothResponse= BabygrothResponse.fromJson(json);
-     return babygrothResponse;
-
-   } catch(e){
-     throw e ;
-   }
-  }
-
-  static Future<bool> addtask( String title,String content,String userId,DateTime dueDate) async {
-   Uri url = Uri.parse("https://gradhub.hwnix.com/api/addList");
-   final connectivityResult = await (Connectivity().checkConnectivity());
-   if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
-     // I am connected to a mobile network.
-     TaskBody taskBody = TaskBody(content:content ,dueDate:dueDate ,title:title ,userId:userId ) ;
-     var response = await post(url,body: taskBody.toJson());
-     if (response.statusCode >=200 || response.statusCode<300 ){
-       var b = AddtaskResponse.fromJson(jsonDecode(response.body));
-       print(b.result);
-       if (b.result =='Data has been saved'){
-         print(b.result);
-         return true;
-       }else{ return false;}
-     }else{
-       return false;}
-   } else {
-     throw Exception('network failed') ;
-   }
- }
- */

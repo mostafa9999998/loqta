@@ -408,11 +408,13 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   void makeorder(BuildContext context)async {
-    AuthProvider authProvider =Provider.of<AuthProvider>(context);
+    AuthProvider authProvider =Provider.of<AuthProvider>(context,listen: false);
+    print('${authProvider.userid}===============================================.......');
     if(formkey.currentState!.validate()){
       try{
         showLoading(context);
-        var sucsses= await ApiManager.order(authProvider.userid.toString(),productid.toString() ,quntity.toString() ,productprice.toString() , selectedcolor,selectedSize );
+        bool sucsses= await ApiManager.order('${authProvider.userid}','$productid' ,'$quntity' ,'$productprice' , selectedcolor,selectedSize );
+        print('$sucsses-----------------------------------------------------------------');
         if(sucsses){
           hideLoading(context);
           showsucsses(context,'order maked successflly');
