@@ -7,6 +7,7 @@ import 'package:loqta/data/models/OrdersResponse.dart';
 import '../models/CategoryResponse.dart';
 import '../models/LoginBody.dart';
 import '../models/LoginResponse.dart';
+import '../models/OfferPicResponse.dart';
 import '../models/OrderBody.dart';
 import '../models/ProductResponse.dart';
 import '../models/RegisterBody.dart';
@@ -64,7 +65,7 @@ class ApiManager{
  }
 
 
- static Future<bool> register(String name,String email,String phone,String password,String address) async {
+ static Future<bool> register(String name,String email,String phone1,String phone2,String password,String address) async {
    Uri url = Uri.parse("${baseapi}${hostapi}Sign_up");
    final connectivityResult = await (Connectivity().checkConnectivity());
    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
@@ -73,8 +74,9 @@ class ApiManager{
          email: email,
          name: name,
          password: password,
-         phone: phone,
-       address: address
+         phonenum1: phone1,
+         phonenum2:phone2 ,
+         address: address
      ) ;
      var response = await post(url,body: registerBody.toJson());
      if (response.statusCode >=200 || response.statusCode<300 ){
@@ -170,6 +172,19 @@ class ApiManager{
      Map json   = jsonDecode(response.body);
      DeleteResponse deleteResponse= DeleteResponse.fromJson(json);
      return deleteResponse;
+   } catch(e){
+     throw e ;
+   }
+ }
+
+
+ static Future<List<OfferPicResponse>> getofferlist() async{
+   try{
+     Uri url = Uri.parse("${baseapi}${hostapi}get_offers");
+     Response response = await get(url);
+     List<dynamic> jsonResponse = jsonDecode(response.body);
+     List<OfferPicResponse> offerPicResponse = jsonResponse.map((json) => OfferPicResponse.fromJson(json)).toList();
+     return offerPicResponse;
    } catch(e){
      throw e ;
    }

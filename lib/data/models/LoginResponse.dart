@@ -27,7 +27,8 @@ class User {
       this.name, 
       this.email, 
       this.address, 
-      this.phone, 
+      this.phonenum1, 
+      this.phonenum2, 
       this.typeId,});
 
   User.fromJson(dynamic json) {
@@ -35,14 +36,16 @@ class User {
     name = json['name'];
     email = json['email'];
     address = json['address'];
-    phone = json['phone'];
+    phonenum1 = json['phonenum1'];
+    phonenum2 = json['phonenum2'];
     typeId = json['type_id'];
   }
   int? id;
   String? name;
   String? email;
   String? address;
-  String? phone;
+  String? phonenum1;
+  String? phonenum2;
   int? typeId;
 
   Map<String, dynamic> toJson() {
@@ -51,7 +54,8 @@ class User {
     map['name'] = name;
     map['email'] = email;
     map['address'] = address;
-    map['phone'] = phone;
+    map['phonenum1'] = phonenum1;
+    map['phonenum2'] = phonenum2;
     map['type_id'] = typeId;
     return map;
   }

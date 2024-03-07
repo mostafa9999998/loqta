@@ -147,6 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
         LoginResponse loginresponse = await ApiManager.loginresponse(emailcontroller.text,passwordcontroller.text);
         int id = loginresponse.user!.id!;
         AuthProvider authProvider =Provider.of<AuthProvider>(context,listen: false);
+        authProvider.setuserinfo(loginresponse);
         authProvider.setuserid(id);
         if(await R){
           hideLoading(context);

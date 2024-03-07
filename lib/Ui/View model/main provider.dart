@@ -7,6 +7,7 @@ class MainProvider extends ChangeNotifier{
   int productid = 1;
   int categoryid = 1;
   int currentindex = 0;
+  //List<OfferPicResponse> OfferPicResponse
 
   void setproductid(int id){
    productid = id ;

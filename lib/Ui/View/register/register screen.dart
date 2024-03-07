@@ -203,7 +203,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (formkey.currentState?.validate()==true){
       try{
         showLoading(context);
-        var R = ApiManager.register(namecontroller.text, emailcontroller.text, phonecontroller.text, passwordcontroller.text,addresscontroller.text);
+        var R = ApiManager.register(namecontroller.text, emailcontroller.text, phonecontroller.text,anotherphonecontroller.text, passwordcontroller.text,addresscontroller.text);
 
         if(await R){
           hideLoading(context);
@@ -215,7 +215,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       }
       catch(e){
         hideLoading(context);
-        showerror(context, 'Some thing went wrong');
+        //showerror(context, 'Some thing went wrong');
+        showmsg(context,'Email already exists');
       }
     }
   }
