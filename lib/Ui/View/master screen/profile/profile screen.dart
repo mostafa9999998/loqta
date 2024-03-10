@@ -22,8 +22,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Container(
         child: Column(
           children: [
-            SizedBox(height:MediaQuery.of(context).size.height*.05,),
-            Row(
+            SizedBox(height:MediaQuery.of(context).size.height*.02,),
+           /* Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
@@ -31,13 +31,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: MediaQuery.of(context).size.width*.5,
                     child: Image.asset('assets/images/logotext.png',fit: BoxFit.fill),
                   )
-                ]),
-            SizedBox(height:MediaQuery.of(context).size.height*.02,),
-            TextProfileStyle(title: 'Name', lable: loginResponse.user!.name!),
-            //TextProfileStyle(title: 'password', lable: loginResponse.user.),
-            TextProfileStyle(title: 'Adress', lable: loginResponse.user!.address!),
-            TextProfileStyle(title: 'Phone Num ', lable: loginResponse.user!.phonenum1!),
-            TextProfileStyle(title: 'Phone Num 2', lable: loginResponse.user!.phonenum2!),
+                ]),*/
+           // SizedBox(height:MediaQuery.of(context).size.height*.02,),
+            TextProfileStyle(title: 'Name',name: 'name', lable: loginResponse.user!.name!),
+            TextProfileStyle(title: 'Phone Num 1',name: 'phonenum1', lable: loginResponse.user!.phonenum1!),
+            TextProfileStyle(title: 'Phone Num 2',name: 'phonenum2', lable: loginResponse.user!.phonenum2!),
+            TextProfileStyle(title: 'Adress',name: 'address', lable: loginResponse.user!.address!),
           ],
         ),
       ),

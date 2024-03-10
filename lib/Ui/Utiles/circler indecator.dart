@@ -60,7 +60,7 @@ void showsucsses(BuildContext context,String message,){
     barrierDismissible: false,
     builder: (context) {
       return  AlertDialog(
-        content: Text(message,style: TextStyle(fontSize: 20)) ,
+        content: Text(message,style: TextStyle(fontSize: 18)) ,
         actions: [
           TextButton(onPressed: () {
             Navigator.pop(context);

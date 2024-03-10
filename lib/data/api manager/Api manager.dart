@@ -4,6 +4,8 @@ import 'package:http/http.dart';
 import 'package:loqta/data/models/DeleteResponse.dart';
 import 'package:loqta/data/models/OrderResponse.dart';
 import 'package:loqta/data/models/OrdersResponse.dart';
+import 'package:loqta/data/models/UpdateBody.dart';
+import 'package:loqta/data/models/UpdateResponse.dart';
 import '../models/CategoryResponse.dart';
 import '../models/LoginBody.dart';
 import '../models/LoginResponse.dart';
@@ -90,13 +92,13 @@ class ApiManager{
    }
  }
 
- static Future<bool> login(String email,String password) async {
+ static Future<bool> login(String phone,String password) async {
    Uri url = Uri.parse("${baseapi}${hostapi}login");
    final connectivityResult = await (Connectivity().checkConnectivity());
    if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi ) {
      // I am connected to a mobile network.
      LoginBody loginBody = LoginBody(
-       email: email,
+       phone: phone,
        password: password,
      ) ;
      var response = await post(url,body: loginBody.toJson());
@@ -111,11 +113,11 @@ class ApiManager{
    }
  }
 
- static Future<LoginResponse> loginresponse(String email,String password) async {
+ static Future<LoginResponse> loginresponse(String phone,String password) async {
    Uri url = Uri.parse("${baseapi}${hostapi}login");
      // I am connected to a mobile network.
      LoginBody loginBody = LoginBody(
-       email: email,
+       phone: phone,
        password: password,
      ) ;
      var response = await post(url,body: loginBody.toJson());
@@ -188,6 +190,43 @@ class ApiManager{
    } catch(e){
      throw e ;
    }
+ }
+
+ static Future<UpdateResponse> update(String attr,String newdata,int userid) async {
+
+   try{
+     if (attr =='name' ){
+     Uri url = Uri.parse("${baseapi}${hostapi}updateuser/$userid?$attr=$newdata");
+
+     var response = await post(url);
+
+     var b = UpdateResponse.fromJson(jsonDecode(response.body));
+     return b ;
+     }else  if (attr =='phonenum1' ){
+       Uri url = Uri.parse("${baseapi}${hostapi}updateuser/$userid?$attr=$newdata");
+       var response = await post(url);
+
+       var b = UpdateResponse.fromJson(jsonDecode(response.body));
+       return b ;
+     }else  if (attr =='phonenum2' ){
+       Uri url = Uri.parse("${baseapi}${hostapi}updateuser/$userid?$attr=$newdata");
+
+       var response = await post(url);
+
+       var b = UpdateResponse.fromJson(jsonDecode(response.body));
+       return b ;
+     }else {
+       Uri url = Uri.parse("${baseapi}${hostapi}updateuser/$userid?$attr=$newdata");
+       var response = await post(url);
+
+       var b = UpdateResponse.fromJson(jsonDecode(response.body));
+       return b ;
+     }
+ } catch(e){
+     throw e ;
+   }
+
+
  }
 
 }

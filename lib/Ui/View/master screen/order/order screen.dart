@@ -18,8 +18,8 @@ class OrderScreen extends StatelessWidget {
            //height: 600,
            child: Column(
              children: [
-               SizedBox(height:MediaQuery.of(context).size.height*.05,),
-               Row(
+               SizedBox(height:MediaQuery.of(context).size.height*.02,),
+             /*  Row(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
                      Container(
@@ -27,8 +27,8 @@ class OrderScreen extends StatelessWidget {
                        width: MediaQuery.of(context).size.width*.5,
                        child: Image.asset('assets/images/logotext.png',fit: BoxFit.fill),
                      )
-                   ]),
-               SizedBox(height:MediaQuery.of(context).size.height*.02,),
+                   ]),*/
+              // SizedBox(height:MediaQuery.of(context).size.height*.02,),
                Expanded(
                  child: ListView.builder(itemBuilder: (context, index) {
                    return OrderStyle(ordersResponse: snapshot.data![index],authProvider: authProvider,);

@@ -1,18 +1,18 @@
-class LoginResponse {
-  LoginResponse({
-      this.type, 
+class UpdateResponse {
+  UpdateResponse({
+      this.message, 
       this.user,});
 
-   LoginResponse.fromJson(dynamic json) {
-    type = json['type'];
+  UpdateResponse.fromJson(dynamic json) {
+    message = json['message'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
-  String? type;
+  String? message;
   User? user;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['type'] = type;
+    map['message'] = message;
     if (user != null) {
       map['user'] = user?.toJson();
     }

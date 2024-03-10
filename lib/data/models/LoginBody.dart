@@ -1,18 +1,18 @@
 class LoginBody {
   LoginBody({
-      this.email, 
+      this.phone,
       this.password,});
 
   LoginBody.fromJson(dynamic json) {
-    email = json['email'];
+    phone = json['phone'];
     password = json['password'];
   }
-  String? email;
+  String? phone;
   String? password;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['email'] = email;
+    map['phone'] = phone;
     map['password'] = password;
     return map;
   }

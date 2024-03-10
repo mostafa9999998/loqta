@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:loqta/Ui/View/master%20screen/profile/updatebottom%20sheet.dart';
 
 class TextProfileStyle extends StatelessWidget {
-   TextProfileStyle({super.key,required this.title,required this.lable});
+   TextProfileStyle({super.key,required this.title,required this.lable,required this.name});
    String title;
    String lable ;
+   String name ;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +30,9 @@ class TextProfileStyle extends StatelessWidget {
                 Text(lable),
                 Spacer(),
                 InkWell(
-                  onTap:() =>  update(),
+                  onTap:() {
+                    update(context,lable);
+                  },
                   child: Icon(Icons.edit),),
                 SizedBox(width:  MediaQuery.of(context).size.width*.03,)
               ],
@@ -38,8 +43,12 @@ class TextProfileStyle extends StatelessWidget {
     );
   }
 
-  update() {
-
+  update(BuildContext context,String lable) {
+showBottomSheet(context: context,
+    builder: (context) {
+  return UpdateButtomSheet(lable:lable,name: name,);
+    },
+);
   }
 }
 

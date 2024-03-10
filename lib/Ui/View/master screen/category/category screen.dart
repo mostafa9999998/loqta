@@ -19,8 +19,8 @@ class CategoryScreen extends StatelessWidget {
       child: Container(
         child: Column(
           children: [
-            SizedBox(height:MediaQuery.of(context).size.height*.05,),
-            Row(
+            SizedBox(height:MediaQuery.of(context).size.height*.02,),
+           /* Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
@@ -31,12 +31,12 @@ class CategoryScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width*.3,
                     child: Image.asset('assets/images/logotext.png',fit: BoxFit.fill),
                   )
-                ]),
+                ]),*/
             Form(
               key: formkey,
               child: Column(
                 children: [
-                  SizedBox(height:MediaQuery.of(context).size.height*.02,),
+                 // SizedBox(height:MediaQuery.of(context).size.height*.02,),
                   Row(
                     children: [
                       SizedBox(width:MediaQuery.of(context).size.width*.01 ,),

@@ -7,6 +7,7 @@ import 'package:loqta/Ui/View/master%20screen/profile/profile%20screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../View model/main provider.dart';
+import '../login/login screen.dart';
 
 
 class MasterScreen extends StatefulWidget {
@@ -28,7 +29,24 @@ class _MasterScreenState extends State<MasterScreen> {
         return false ;
       },
       child: Scaffold(
-
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title:  Container(
+            height: MediaQuery.of(context).size.height*.05,
+            width: MediaQuery.of(context).size.width*.3,
+            child: Center(child: Image.asset('assets/images/logotext.png',fit: BoxFit.fill)),
+          ),
+          actions: [
+            InkWell(
+              onTap: () {
+                Navigator.pushReplacementNamed(context, LoginScreen.loginname);
+              },
+              child: Icon(Icons.logout, color: ColorApp.primarycolor,size: 30),
+            ),
+            SizedBox(width:MediaQuery.of(context).size.width*.03 ,)
+          ],
+        ),
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),

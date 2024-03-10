@@ -33,8 +33,8 @@ class Home extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          SizedBox(height:MediaQuery.of(context).size.height*.05,),
-          Row(
+          SizedBox(height:MediaQuery.of(context).size.height*.02,),
+        /*  Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
@@ -45,12 +45,12 @@ class Home extends StatelessWidget {
                   width: MediaQuery.of(context).size.width*.3,
                   child: Image.asset('assets/images/logotext.png',fit: BoxFit.fill),
                 )
-              ]),
+              ]),*/
           SingleChildScrollView(
             child: Form(
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height*.03,),
+                  //SizedBox(height: MediaQuery.of(context).size.height*.03,),
                   FutureBuilder(
                     future: ApiManager.getofferlist(),
                     builder: (context, snapshot) {

@@ -47,28 +47,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .07,
                 ),
-                Text('Please sign in with your mail',
+                Text('Please sign in with your phone',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .05,
                 ),
                 Text(
-                  'Email address',
+                  'Phone number',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22,color: Colors.white),
                 ),
                 TextFieldWedget(
-                    hint: 'You@Example.com',
+                    hint: '0100000000',
                     cotroler: emailcontroller,
                     Validfunction: (value) {
                       if (value!.isEmpty || value.trim().isEmpty) {
-                        return "e-mail can't be empty";
-                      }
-                      bool emailValid = RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value);
-                      if (!emailValid) {
-                        return 'please enter valid e-mail';
+                        return "phone can't be empty";
                       }
                     }),
                 SizedBox(
@@ -151,6 +145,16 @@ class _LoginScreenState extends State<LoginScreen> {
         authProvider.setuserid(id);
         if(await R){
           hideLoading(context);
+
+          authProvider.setloginemail(loginresponse.user!.email!);
+          authProvider.setloginaddress(loginresponse.user!.address!);
+          authProvider.setloginname(loginresponse.user!.name!);
+          authProvider.setloginid(loginresponse.user!.id!);
+          authProvider.setloginphonenum1(loginresponse.user!.phonenum1!);
+          authProvider.setloginphonenum2(loginresponse.user!.phonenum2!);
+          authProvider.setlogintype(loginresponse.type!);
+          authProvider.setlogintypeid(loginresponse.user!.typeId!);
+
           Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
         } else{
           hideLoading(context);
